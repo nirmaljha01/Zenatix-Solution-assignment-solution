@@ -5,7 +5,7 @@ import time
 import random
 
 # MQTT Configuration
-MQTT_BROKER = "mqtt.eclipse.org"
+MQTT_BROKER = "broker.hivemq.com"
 MQTT_PORT = 1883
 MQTT_TOPIC = "hotel/temperature"
 
