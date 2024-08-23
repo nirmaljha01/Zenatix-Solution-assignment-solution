@@ -1,0 +1,26 @@
+# server.py
+
+from flask import Flask, jsonify
+import json
+
+app = Flask(__name__)
+
+# Function to retrieve the latest temperature data from file
+def get_last_temperature_data():
+    try:
+        with open("temperature_data.json", "r") as file:
+            lines = file.readlines()
+            if lines:
+                return json.loads(lines[-1])
+            else:
+                return {}
+    except FileNotFoundError:
+        return {}
+
+@app.route('/sensor-data', methods=['GET'])
+def sensor_data():
+    data = get_last_temperature_data()
+    return jsonify(data)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
