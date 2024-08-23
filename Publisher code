@@ -1,0 +1,34 @@
+# publisher.py
+
+import paho.mqtt.client as mqtt
+import time
+import random
+
+# MQTT Configuration
+MQTT_BROKER = "mqtt.eclipse.org"
+MQTT_PORT = 1883
+MQTT_TOPIC = "hotel/temperature"
+
+# Function to simulate temperature readings
+def read_temperature():
+    return random.uniform(20.0, 30.0)  # Simulates temperature between 20°C and 30°C
+
+def on_connect(client, userdata, flags, rc):
+    print(f"Connected to MQTT Broker with result code {rc}")
+
+def on_publish(client, userdata, result):
+    print("Temperature data published")
+
+# Create and configure MQTT client
+client = mqtt.Client()
+client.on_connect = on_connect
+client.on_publish = on_publish
+
+# Connect to the MQTT broker
+client.connect(MQTT_BROKER, MQTT_PORT, 60)
+
+# Infinite loop to publish temperature data every 60 seconds
+while True:
+    temperature = read_temperature()
+    client.publish(MQTT_TOPIC, temperature)
+    time.sleep(60)
