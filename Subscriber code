@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 
 # MQTT Configuration
-MQTT_BROKER = "mqtt.eclipse.org"
+MQTT_BROKER = "broker.hivemq.com"
 MQTT_PORT = 1883
 MQTT_TOPIC = "hotel/temperature"
 THRESHOLD = 25.0  # Temperature threshold to trigger alarm
